@@ -7,13 +7,13 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Tymon\JWTAuth\Contracts\JWTSubject;
-use App\Models\Delivery;
+use App\Models\Admin;
 
-class Admin extends Authenticatable implements JWTSubject
+class Delivery extends Authenticatable implements JWTSubject
 {
     use Notifiable;
-    //workshop table
-    protected $table = 'admins';
+
+    protected $table = 'delivery';
 
     /**
      * The attributes that are mass assignable.
@@ -21,12 +21,13 @@ class Admin extends Authenticatable implements JWTSubject
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password','created_at','updated_at'
+        'name', 'email', 'password','id_workshop','created_at','updated_at'
     ];
 
 
-    public function delivery(){
-        return $this->hasMany(Delivery::class, 'id_workshop' ,'id'); 
+    // here is i will make table related
+    public function workshop(){
+        return $this->belongsTo(Admin::class, 'id_workshop' ,'id');
     }  
 
     /**

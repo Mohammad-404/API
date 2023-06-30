@@ -50,12 +50,18 @@ return [
         'admin-api' => [
             'driver' => 'jwt',
             'provider' => 'admins',
-        ],
+        ], //watershop
 
         'customer-api' => [
             'driver' => 'jwt',
             'provider' => 'users',
-        ],
+        ], //customer
+
+
+        'delivery-api' => [
+            'driver' => 'jwt',
+            'provider' => 'delivery',
+        ], //delivery
 
     ],
 
@@ -80,12 +86,17 @@ return [
         'users' => [
             'driver' => 'eloquent',
             'model' => App\User::class,
-        ],
+        ], //customer
 
         'admins' => [
             'driver' => 'eloquent',
             'model' => App\Models\Admin::class,
-        ],
+        ], //watershop
+
+        'delivery' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Delivery::class,
+        ], //delivery
 
         // 'users' => [
         //     'driver' => 'database',

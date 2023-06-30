@@ -1,11 +1,9 @@
 <?php
 
-namespace App\Http\Controllers\Customer;
+namespace App\Http\Controllers\Delivery;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-// use App\Models\Admin;
-// use App\Requests\Admin\loginRequest;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use App\Traits\GeneralTrait;
 use Illuminate\Support\Facades\Validator;
@@ -38,16 +36,16 @@ class loginController extends Controller
         //End Validation
 
         $credentials = $request->only(['email','password']);
-        $token = Auth::guard('customer-api')->attempt($credentials);
+        $token = Auth::guard('delivery-api')->attempt($credentials);
 
         if (!$token) {
             return $this->returnError('3000','UserName or Password not correct');
         }
 
-        $customer = Auth::guard('customer-api')->user(); //return all info customer
-        $customer->api_token = $token; // add token in the messages
+        $delivery = Auth::guard('delivery-api')->user(); //return all info delivery
+        $delivery->api_token = $token; // add token in the messages
 
-        return $this->returnData('200','Login Success','Success',$customer);
+        return $this->returnData('200','Login Success','Success',$delivery);
     }
 
     public function logout(Request $request){
@@ -73,5 +71,4 @@ class loginController extends Controller
             }
         }
     }
-
 }
