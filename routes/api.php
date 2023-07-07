@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
 Route::group(['middleware' => 'checkPassword'],function () {
 
     Route::group(['prefix' => 'admin','namespace' => 'Admin'],function () {
@@ -42,10 +43,14 @@ Route::group(['middleware' => 'checkPassword'],function () {
 });
 
 //watershop
-Route::group(['prefix'=>'watershop','middleware' => ['checkPassword','assign.guard:admin-api']],function () {
+Route::group(['prefix'=>'watershop','namespace' => 'Admin','middleware' => ['checkPassword','assign.guard:admin-api']],function () {
     Route::post('/profile',function(){
         return \Auth::user();
     });
+
+    Route::post('/add delivery','addDeleviryController@setDelivery');
+    Route::post('/get delivery','addDeleviryController@getDelivery');
+
 });
 
 //customer

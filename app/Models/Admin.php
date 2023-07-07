@@ -21,9 +21,14 @@ class Admin extends Authenticatable implements JWTSubject
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password','created_at','updated_at'
+        'name', 'email', 'password','pic','address','phonenumber','payment','created_at','updated_at'
     ];
 
+    public function scopeSelection($query){
+        return $query->select(
+            'id','name', 'email', 'password','pic','address','phonenumber','payment','created_at','updated_at'
+        );
+    }
 
     public function delivery(){
         return $this->hasMany(Delivery::class, 'id_workshop' ,'id'); 
