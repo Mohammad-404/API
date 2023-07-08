@@ -8,6 +8,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 use App\Models\Admin;
+// use App\Models\Deliveryorders;
+use App\Observers\DeliveryOrdersObserver;
 
 class Delivery extends Authenticatable implements JWTSubject
 {
@@ -29,6 +31,16 @@ class Delivery extends Authenticatable implements JWTSubject
     public function workshop(){
         return $this->belongsTo(Admin::class, 'id_workshop' ,'id');
     }  
+
+    public function deliveryOrders(){
+        return $this->hasMany(Deliveryorders::class, 'id_delivery','id');
+    }
+
+    /** Connection Observe With Models */ 
+    protected static function boot(){
+        parent::boot();
+        Delivery::observe(DeliveryOrdersObserver::class);
+    }
 
     /**
      * Get the identifier that will be stored in the subject claim of the JWT.

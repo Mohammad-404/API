@@ -38,4 +38,25 @@ class addDeleviryController extends Controller
             return $this->returnError(404,'Please Contact Support !!');
         }
     }
+
+    public function deleteDelivery($id){
+        try {
+            $delivery = Delivery::find($id);
+            if (!$delivery) {
+                return $this->returnError(404,'Delivery is not found !!');
+            }
+
+            $orders = $delivery->delivery();
+            if (isset($orders) && $orders->count() > 0) {
+                return $this->returnError(404,'Sorry Cannot Delete Delivery Beacuse Some Relations !!');
+            } 
+
+            $delivery->delete();
+            return $this->returnSuccess(200,'Delete Successfully');
+
+        } catch (\Exception $ex) {
+            return $this->returnError(404,'Please Contact Support !!');
+        }
+    }
+
 }
