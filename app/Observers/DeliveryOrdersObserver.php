@@ -36,7 +36,7 @@ class DeliveryOrdersObserver
      */
     public function deleted(Delivery $delivery)
     {
-        $delivery->deliveryOrders()->delete();
+        // $delivery->deliveryOrders()->delete(); //when we want to delete delivery all orders under this delivery it will be delete
     }
 
     /**

@@ -46,13 +46,49 @@ class addDeleviryController extends Controller
                 return $this->returnError(404,'Delivery is not found !!');
             }
 
-            $orders = $delivery->delivery();
-            if (isset($orders) && $orders->count() > 0) {
-                return $this->returnError(404,'Sorry Cannot Delete Delivery Beacuse Some Relations !!');
-            } 
+            // $orders = $delivery->delivery();
+            // if (isset($orders) && $orders->count() > 0) {
+            //     return $this->returnError(404,'Sorry Cannot Delete Delivery Beacuse Some Relations !!');
+            // } 
 
             $delivery->delete();
             return $this->returnSuccess(200,'Delete Successfully');
+
+        } catch (\Exception $ex) {
+            return $this->returnError(404,'Please Contact Support !!');
+        }
+    }
+
+    public function updateDelivery($id){
+        try {
+            $work_shope_id = \Auth::id();
+            $delivery = Delivery::find($id);
+            if (!$delivery) {
+                return $this->returnError(404,'Delivery is not found !!');
+            }
+
+            $delivery->update([
+                'name'          => $request->name,
+                'email'         => $request->email,
+                'password'      => bcrypt($request->password),
+                'id_workshop'   => $work_shope_id,
+            ]);
+
+            return $this->returnSuccess(200,'Update Successfully');
+
+        } catch (\Exception $ex) {
+            return $this->returnError(404,'Please Contact Support !!');
+        }
+    }
+
+    public function editDelivery($id){
+        try {
+            $delivery = Delivery::find($id);
+            if (!$delivery) {
+                return $this->returnError(404,'ID not found !!');
+            }
+            
+            return $this->returnData('200', 'ok', 'delivery', $delivery);
 
         } catch (\Exception $ex) {
             return $this->returnError(404,'Please Contact Support !!');

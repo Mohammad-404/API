@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 use App\Models\Delivery;
+use App\Models\products;
 
 class Admin extends Authenticatable implements JWTSubject
 {
@@ -33,6 +34,11 @@ class Admin extends Authenticatable implements JWTSubject
     public function delivery(){
         return $this->hasMany(Delivery::class, 'id_workshop' ,'id'); 
     }  
+
+    public function products(){
+        return $this->hasMany(products::class, 'watershop_id' ,'id'); 
+    }  
+    // watershope
 
     /**
      * Get the identifier that will be stored in the subject claim of the JWT.

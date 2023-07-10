@@ -13,18 +13,15 @@ class deliveryOrders extends Model
     protected $table = 'deliveryorders';
 
     protected $fillable = [
-        'customer_name','customer_number','customer_address','price','payment_method','id_order','id_delivery'
-        ,'created_at','updated_at'
+        'id_order','id_delivery','delivery_status','evidence_photo','created_at','updated_at'
     ];
 
     public function scopeSelection($query){
-        return $query->select('id','customer_name','customer_number','customer_address',
-        'price','payment_method','id_order','id_delivery','created_at','updated_at');
+        return $query->select('id','id_order','id_delivery','delivery_status',
+                                'evidence_photo','created_at','updated_at');
     }
 
-    public function delivery(){
-        return $this->belongsTo(Delivery::class, 'id_delivery','id');
-    }
+    
 
 
 }

@@ -48,8 +48,21 @@ Route::group(['prefix'=>'watershop','namespace' => 'Admin','middleware' => ['che
         return \Auth::user();
     });
 
-    Route::post('/add delivery','addDeleviryController@setDelivery');
-    Route::post('/get delivery','addDeleviryController@getDelivery');
+    Route::group(['prefix' => 'delivery'],function(){
+        Route::post('/insert','addDeleviryController@setDelivery');
+        Route::post('/view','addDeleviryController@getDelivery');
+        Route::post('/edit/{id}','addDeleviryController@editDelivery');
+        Route::post('/delete/{id}','addDeleviryController@deleteDelivery');
+        Route::post('/update/{id}','addDeleviryController@updateDelivery');
+    });
+       
+    Route::group(['prefix' => 'products'],function(){
+        Route::post('/insert','productsController@insert');
+        Route::post('/view','productsController@get');
+        Route::post('/edit/{id}','productsController@edit');
+        Route::post('/delete/{id}','productsController@delete');
+        Route::post('/update/{id}','productsController@update');
+    });
 
 });
 
@@ -65,5 +78,6 @@ Route::group(['prefix'=>'delivery','middleware' => ['checkPassword','assign.guar
     Route::post('/profile',function(){
         return \Auth::user();
     });
+    
 
 });

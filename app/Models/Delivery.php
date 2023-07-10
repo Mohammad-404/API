@@ -26,21 +26,17 @@ class Delivery extends Authenticatable implements JWTSubject
         'name', 'email', 'password','id_workshop','created_at','updated_at'
     ];
 
-
     // here is i will make table related
     public function workshop(){
         return $this->belongsTo(Admin::class, 'id_workshop' ,'id');
     }  
 
-    public function deliveryOrders(){
-        return $this->hasMany(Deliveryorders::class, 'id_delivery','id');
-    }
 
     /** Connection Observe With Models */ 
-    protected static function boot(){
-        parent::boot();
-        Delivery::observe(DeliveryOrdersObserver::class);
-    }
+    // protected static function boot(){
+    //     parent::boot();
+    //     Delivery::observe(DeliveryOrdersObserver::class);
+    // }
 
     /**
      * Get the identifier that will be stored in the subject claim of the JWT.
