@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use App\Models\Delivery;
+use App\Models\orders;
 
 class deliveryOrders extends Model
 {
@@ -21,6 +22,9 @@ class deliveryOrders extends Model
                                 'evidence_photo','created_at','updated_at');
     }
 
+    public function orders(){
+        return $this->belongsTo(orders::class,'id_order','id');
+    }
     
 
 

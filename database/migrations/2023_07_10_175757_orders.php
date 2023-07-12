@@ -24,6 +24,7 @@ class Orders extends Migration
             $table->string('payment_method');
             $table->string('product_id');
             $table->string('watershop_id');
+            $table->string('customer_id');
             $table->timestamps();
         });
     }
