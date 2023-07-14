@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Models\Admin;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,13 +15,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    Admin::create([
+        'phonenumber'       => '0795439152',
+        'name'              => 'mohammad almasri',
+        'email'             => 'm.almasri97.me@gmail.com',
+        'password'          => bcrypt('12345'),
+    ]);
 });
 
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');

@@ -8,6 +8,8 @@ use App\Models\Delivery;
 use App\Models\Admin;
 use App\Models\deliveryOrders;
 use App\Traits\GeneralTrait;
+use Illuminate\Support\Facades\Validator;
+
 
 class addDeleviryController extends Controller
 {
@@ -17,7 +19,8 @@ class addDeleviryController extends Controller
         try {
             $id = \Auth::id();
             $data = Admin::where('id',$id)->with('delivery')->selection()->get();
-            return $this->returnData('200', 'ok', 'delivery', $data);
+
+            return $this->returnData('200', 'ok', 'watershop', $data);
         } catch (\Exception $ex) {
             return $this->returnError(404,'Please Contact Support !!');
         }
@@ -30,9 +33,10 @@ class addDeleviryController extends Controller
                 'name'          => $request->name,
                 'email'         => $request->email,
                 'password'      => bcrypt($request->password),
+                'phonenumber'   => $request->phonenumber,
                 'id_workshop'   => $id,
             ]);
-            
+                        
             return $this->returnSuccess(200,'Registered Successfully');
 
         } catch (\Exception $ex) {
@@ -60,10 +64,11 @@ class addDeleviryController extends Controller
         }
     }
 
-    public function updateDelivery($id){
+    public function updateDelivery($id,Request $request){
         try {
             $work_shope_id = \Auth::id();
             $delivery = Delivery::find($id);
+
             if (!$delivery) {
                 return $this->returnError(404,'Delivery is not found !!');
             }
@@ -72,8 +77,9 @@ class addDeleviryController extends Controller
                 'name'          => $request->name,
                 'email'         => $request->email,
                 'password'      => bcrypt($request->password),
-                'id_workshop'   => $work_shope_id,
+                'phonenumber'   => $request->phonenumber,
             ]);
+
 
             return $this->returnSuccess(200,'Update Successfully');
 

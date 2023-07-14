@@ -20,12 +20,12 @@ class loginController extends Controller
         //Validation 
         try {
             $rule = [
-                'email'         => 'required',
-                'password'      => 'required',
+                'phonenumber'               => 'required',
+                'password'                  => 'required',
             ];       
             $message = [
-                'email.required'      => 'the fields is required',
-                'password.required'      => 'the fields is required',
+                'phonenumber.required'      => 'the fields is required',
+                'password.required'         => 'the fields is required',
             ];
      
             $validator = Validator::make($request->all(), $rule);
@@ -37,7 +37,7 @@ class loginController extends Controller
         }
         //End Validation
 
-        $credentials = $request->only(['email','password']);
+        $credentials = $request->only(['phonenumber','password']);
         $token = Auth::guard('admin-api')->attempt($credentials);
 
         if (!$token) {

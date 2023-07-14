@@ -25,13 +25,19 @@ class productsController extends Controller
     public function insert(Request $request){
         try {            
             $id = \Auth::id();
+
+            $filePath = "";
+            if($request -> has('photo')){ //hal find image from request??
+                $filePath = uploadImage('watershop' , $request->photo);
+            }
+
             products::create([
                 'watershop_id'                  => $id,
                 'product_name'                  => $request->product_name,
                 'stock_qty'                     => $request->stock_qty,
                 'product_description'           => $request->product_description,
                 'price'                         => $request->price,
-                'photo'                         => $request->photo,
+                'photo'                         => $filePath,
             ]);
             return $this->returnSuccess(200,'Registered Successfully');
         } catch (\Exception $th) {
@@ -46,13 +52,19 @@ class productsController extends Controller
             if (!$ids) {
                 return $this->returnError(404,'ID is not found !!');            
             }
+
+            $filePath = "";
+            if($request->has('photo') != ""){
+                $filePath = uploadImage('watershop' , $request->photo);
+            }
+
             $ids->update([
                 'watershop_id'                  => $water_shop_id,
                 'product_name'                  => $request->product_name,
                 'stock_qty'                     => $request->stock_qty,
                 'product_description'           => $request->product_description,
                 'price'                         => $request->price,
-                'photo'                         => $request->photo,
+                'photo'                         => $filePath,
             ]);
             return $this->returnSuccess(200,'Update Successfully');
         } catch (\Exception $ex) {

@@ -23,7 +23,7 @@ class Delivery extends Authenticatable implements JWTSubject
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password','id_workshop','created_at','updated_at'
+        'name', 'email', 'password','phonenumber','id_workshop','created_at','updated_at'
     ];
 
     // here is i will make table related
