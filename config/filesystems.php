@@ -55,6 +55,20 @@ return [
             'visibility' => 'public',
         ],
 
+        'customer' => [
+            'driver' => 'local',
+            'root' => base_path('assets/customer'),
+            'url' => env('APP_URL').'/assets',
+            'visibility' => 'public',
+        ],
+
+        'watershop' => [
+            'driver' => 'local',
+            'root' => base_path('assets/watershop'),
+            'url' => env('APP_URL').'/assets',
+            'visibility' => 'public',
+        ],
+
         's3' => [
             'driver' => 's3',
             'key' => env('AWS_ACCESS_KEY_ID'),
