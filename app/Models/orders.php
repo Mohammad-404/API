@@ -14,14 +14,15 @@ class orders extends Model
     protected $table = 'orders';
     
     protected $fillable = [
-        'customer_id','customer_name','customer_phone','unit_price','qty','total_price','address','payment_method',
-        'product_id','watershop_id','created_at','updated_at'
+        'customer_id','customer_name','customer_phone','unit_price','qty','total_price','address'
+        ,'payment_method','product_id','watershop_id','created_at','updated_at'
     ];
 
     public function scopeSelection($query){
         return $query->select(
-            'id','customer_id','customer_name','customer_phone','unit_price','qty','total_price','address','payment_method',
-            'product_id','watershop_id','created_at','updated_at'    
+            'id','customer_id','customer_name','customer_phone','unit_price','qty',
+            'total_price','address','payment_method','product_id',
+            'watershop_id','created_at','updated_at'    
         );
     }
 

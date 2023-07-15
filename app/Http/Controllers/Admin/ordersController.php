@@ -18,7 +18,7 @@ class ordersController extends Controller
     public function getOrdersForWaterShop(){ //this is for water shop
         $id = \Auth::id();
         $data = orders::where('watershop_id',$id)->with('products')->selection()->get();
-        return $this->returnData('200', 'ok', 'data', $data);
+        return $this->returnData('200', 'ok', 'orders', $data);
     }
 
     public function getOrdersForCustomers(){ //this is for customer from his profile
@@ -61,7 +61,8 @@ class ordersController extends Controller
         }
     
         // this function to save order for delivery !
-        public function send_orders_to_delivery(Request $request){ //insert order from customer
+        public function send_orders_to_delivery(Request $request){ 
+            //send order from watershop to delivery
             try {
                 $save_orders = deliveryOrders::create([
                     'id_order'              => $request->id_order,

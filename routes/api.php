@@ -56,7 +56,12 @@ Route::group(['prefix'=>'watershop','namespace' => 'Admin','middleware' => ['che
         Route::post('/delete/{id}','addDeleviryController@deleteDelivery');
         Route::post('/update/{id}','addDeleviryController@updateDelivery');
     });
-       
+ 
+    Route::group(['prefix' => 'orders'],function(){
+        Route::post('/','ordersController@getOrdersForWaterShop');
+        Route::post('/send_order_to_delivery','ordersController@getOrdersForWaterShop');
+    });
+
     Route::group(['prefix' => 'products'],function(){
         Route::post('/insert','productsController@insert');
         Route::post('/view','productsController@get');
